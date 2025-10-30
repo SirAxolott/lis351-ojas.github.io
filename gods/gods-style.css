@@ -1,0 +1,198 @@
+/* Gods page specific animations */
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+}
+
+@keyframes powerEffect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Big Three and God Cards Layout */
+.god-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+    padding: 1em;
+}
+
+.big-three-cards {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* God Card Base Styling */
+.god-card {
+    background: #FFF;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(205, 127, 50, 0.2);
+    animation: slideInFromLeft 0.8s ease-out backwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.god-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Stagger card animations */
+.god-card:nth-child(1) { animation-delay: 0.2s; }
+.god-card:nth-child(2) { animation-delay: 0.4s; }
+.god-card:nth-child(3) { animation-delay: 0.6s; }
+.god-card:nth-child(4) { animation-delay: 0.8s; }
+.god-card:nth-child(5) { animation-delay: 1.0s; }
+.god-card:nth-child(6) { animation-delay: 1.2s; }
+
+/* Big Three Section */
+.big-three {
+    margin: 3em 0;
+    padding: 2em;
+    background: linear-gradient(135deg, 
+        rgba(218, 165, 32, 0.1) 0%, 
+        rgba(184, 134, 11, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    animation: glowPulse 3s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.big-three::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: powerEffect 10s infinite linear;
+}
+
+/* Big Three Special Card Styling */
+.big-three .god-card {
+    background: linear-gradient(to bottom, #FFF 0%, #FFF9F0 100%);
+    border: 2px solid rgba(218, 165, 32, 0.3);
+}
+
+/* God-specific styles */
+
+/* Zeus Styling */
+.zeus {
+    box-shadow: 0 4px 15px rgba(135, 206, 235, 0.2);
+    background: linear-gradient(120deg, #f6f7f8 0%, #e9ebee 100%);
+}
+
+.zeus::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.3) 25%, 
+        rgba(255, 255, 255, 0.3) 50%, 
+        transparent 100%);
+    animation: powerEffect 3s infinite linear;
+    z-index: 1;
+}
+
+/* Poseidon Styling */
+.poseidon {
+    box-shadow: 0 4px 15px rgba(0, 119, 190, 0.2);
+    background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.poseidon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 119, 190, 0.2) 25%,
+        rgba(0, 119, 190, 0.2) 50%,
+        transparent 100%);
+    animation: powerEffect 4s infinite linear;
+    z-index: 1;
+}
+
+/* Hades Styling */
+.hades {
+    box-shadow: 0 4px 15px rgba(72, 61, 139, 0.2);
+    background: linear-gradient(120deg, #f5f5f5 0%, #eeeeee 100%);
+}
+
+.hades::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(72, 61, 139, 0.2) 25%,
+        rgba(72, 61, 139, 0.2) 50%,
+        transparent 100%);
+    animation: powerEffect 5s infinite linear;
+    z-index: 1;
+}
+
+/* God Card Content */
+.god-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    border: 1px solid rgba(205, 127, 50, 0.2);
+}
+
+.big-three .god-image {
+    height: 300px;
+}
+
+.god-details {
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid rgba(205, 127, 50, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .big-three-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1em;
+    }
+    .god-image {
+        height: 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    .big-three-cards {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+    .god-cards {
+        grid-template-columns: 1fr;
+    }
+    .god-image {
+        height: 200px;
+    }
+    .big-three .god-image {
+        height: 250px;
+    }
+}

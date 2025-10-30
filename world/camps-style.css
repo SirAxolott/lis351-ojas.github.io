@@ -1,0 +1,224 @@
+/* Camp-specific animations */
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+}
+
+@keyframes powerEffect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Camp Intro Section Card */
+.camp-intro {
+    margin: 3em 0;
+    padding: 2em;
+    background: linear-gradient(135deg, 
+        rgba(218, 165, 32, 0.1) 0%, 
+        rgba(184, 134, 11, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    animation: glowPulse 3s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.camp-intro::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: powerEffect 10s infinite linear;
+}
+
+.camp-intro h2 {
+    color: var(--color-heading-bronze);
+    font-size: 1.8em;
+    margin: 0 0 0.6em 0;
+}
+
+.camp-intro p {
+    margin: 0;
+}
+
+/* Camp general section card (no continuous glow) */
+.camp-section {
+    margin: 3em 0;
+    padding: 2em;
+    background: linear-gradient(135deg,
+        rgba(218, 165, 32, 0.08) 0%,
+        rgba(184, 134, 11, 0.04) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(218, 165, 32, 0.18);
+    position: relative;
+    overflow: hidden;
+    animation: slideUpFade 0.8s ease-out both;
+}
+
+.camp-section h2 {
+    color: var(--color-heading-bronze);
+    font-size: 1.8em;
+    margin: 0 0 0.6em 0;
+}
+
+.camp-section p {
+    margin: 0 0 0.8em 0;
+}
+
+/* Camps Layout */
+.camps-comparison {
+    margin: 3em 0;
+    padding: 2em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2em;
+    position: relative;
+}
+
+/* Camp Card Base Styling */
+.camp-card {
+    background: #FFF;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+    animation: slideUpFade 0.8s ease-out backwards;
+}
+
+/* Camp-specific styles */
+.camp-card.halfblood {
+    border-left: 6px solid #1E88E5; /* ocean blue */
+    background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
+    animation-delay: 0.2s;
+}
+
+.camp-card.halfblood::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(30, 136, 229, 0.2) 25%,
+        rgba(30, 136, 229, 0.2) 50%,
+        transparent 100%);
+    animation: powerEffect 4s infinite linear;
+    z-index: 1;
+}
+
+.camp-card.jupiter {
+    border-left: 6px solid #c0392b; /* Roman red */
+    background: linear-gradient(120deg, #FFEBEE 0%, #FFCDD2 100%);
+    animation-delay: 0.4s;
+}
+
+.camp-card.jupiter::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(192, 57, 43, 0.2) 25%,
+        rgba(192, 57, 43, 0.2) 50%,
+        transparent 100%);
+    animation: powerEffect 4s infinite linear;
+    z-index: 1;
+}
+
+.camp-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Camp Content Styling */
+.camp-card h2 {
+    color: var(--color-heading-bronze);
+    font-size: 2em;
+    margin: 0 0 0.5em 0;
+    position: relative;
+    z-index: 2;
+}
+
+.camp-card h3 {
+    color: #34495e;
+    margin: 0 0 1em 0;
+    font-weight: normal;
+    font-size: 1.2em;
+    position: relative;
+    z-index: 2;
+}
+
+.camp-card p {
+    position: relative;
+    z-index: 2;
+}
+
+/* Camp Details Styling */
+.camp-details {
+    margin-top: 2em;
+    padding-top: 1.5em;
+    border-top: 1px solid rgba(205, 127, 50, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.camp-details h4 {
+    color: var(--color-heading-bronze);
+    margin: 0 0 1em 0;
+    font-size: 1.2em;
+}
+
+.camp-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.camp-details li {
+    margin: 0.8em 0;
+    padding-left: 1.5em;
+    position: relative;
+    color: var(--color-text-dark);
+}
+
+.camp-details li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-bronze);
+}
+
+.camp-details li strong {
+    color: var(--color-heading-bronze);
+    font-weight: bold;
+    margin-right: 0.5em;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .camps-comparison {
+        grid-template-columns: 1fr;
+        padding: 1em;
+        gap: 1.5em;
+    }
+    
+    .camp-card {
+        padding: 1.5em;
+    }
+    
+    .camp-card h2 {
+        font-size: 1.8em;
+    }
+}

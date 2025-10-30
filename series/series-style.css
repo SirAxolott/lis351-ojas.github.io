@@ -1,0 +1,193 @@
+/* Series-specific animations */
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+}
+
+@keyframes powerEffect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmerEffect {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Series Section Base Styling */
+.series-section {
+    margin: 3em 0;
+    padding: 2em;
+    background: linear-gradient(135deg, 
+        rgba(218, 165, 32, 0.1) 0%, 
+        rgba(184, 134, 11, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: slideUpFade 0.8s ease-out backwards;
+}
+
+/* Series Info Layout */
+.series-info {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    grid-auto-rows: auto;
+    gap: 2em;
+    align-items: start;
+    padding: 1em;
+    position: relative;
+    z-index: 2;
+}
+
+/* Heading Styles */
+.series-info h2 {
+    grid-column: 1;
+    grid-row: 1;
+    color: var(--color-heading-bronze);
+    font-size: 2em;
+    margin: 0 0 0.5em 0;
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid rgba(205, 127, 50, 0.3);
+    position: relative;
+}
+
+.series-info h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--color-accent-bronze) 0%, 
+        transparent 100%);
+}
+
+.series-info h3 {
+    grid-column: 1;
+    grid-row: 2;
+    color: #34495e;
+    font-size: 1.2em;
+    margin: 0 0 1em 0;
+    font-weight: normal;
+}
+
+/* Content Styling */
+.series-info p {
+    grid-column: 1;
+    grid-row: 3;
+    line-height: 1.6;
+    color: var(--color-text-dark);
+    margin-bottom: 1em;
+    position: relative;
+    z-index: 2;
+}
+
+/* Book List Styling */
+.book-list {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    background: #FFF;
+    padding: 1.5em;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(205, 127, 50, 0.2);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.book-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(218, 165, 32, 0.1) 25%,
+        rgba(218, 165, 32, 0.1) 50%,
+        transparent 100%);
+    animation: shimmerEffect 3s infinite;
+}
+
+.book-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.book-list h4 {
+    color: var(--color-heading-bronze);
+    margin: 0 0 1em 0;
+    font-size: 1.2em;
+    position: relative;
+    z-index: 2;
+}
+
+.book-list ol {
+    margin: 0;
+    padding-left: 1.5em;
+    position: relative;
+    z-index: 2;
+}
+
+.book-list li {
+    margin: 0.8em 0;
+    color: var(--color-text-dark);
+    position: relative;
+}
+
+.book-list li::marker {
+    color: var(--color-accent-bronze);
+    font-weight: bold;
+}
+
+/* Stagger Animations */
+.series-section:nth-of-type(1) { animation-delay: 0.2s; }
+.series-section:nth-of-type(2) { animation-delay: 0.4s; }
+.series-section:nth-of-type(3) { animation-delay: 0.6s; }
+
+/* Special Series Styling */
+.original-series { background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(41, 128, 185, 0.05) 100%); }
+.heroes-series { background: linear-gradient(135deg, rgba(155, 89, 182, 0.1) 0%, rgba(142, 68, 173, 0.05) 100%); }
+.apollo-series { background: linear-gradient(135deg, rgba(241, 196, 15, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%); }
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .series-info {
+        grid-template-columns: 1fr;
+        gap: 1.5em;
+    }
+
+    .book-list {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: 1.5em;
+    }
+
+    .series-info h2,
+    .series-info h3,
+    .series-info p {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .series-section {
+        padding: 1.5em;
+        margin: 2em 0;
+    }
+
+    .series-info {
+        padding: 0;
+    }
+
+    .book-list {
+        padding: 1.2em;
+    }
+}

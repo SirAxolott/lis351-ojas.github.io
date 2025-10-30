@@ -1,0 +1,193 @@
+/* Hero-specific animations */
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.4); }
+    100% { box-shadow: 0 0 5px rgba(218, 165, 32, 0.2); }
+}
+
+@keyframes powerEffect {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Hero Cards Layout */
+.hero-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2em;
+    padding: 1em;
+}
+
+.main-heroes-cards {
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Hero Card Base Styling */
+.hero-card {
+    background: #FFF;
+    border-radius: 10px;
+    padding: 1.5em;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(205, 127, 50, 0.2);
+    animation: slideInFromLeft 0.8s ease-out backwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Stagger card animations */
+.other-heroes .hero-card:nth-child(1) { animation-delay: 0.2s; }
+.other-heroes .hero-card:nth-child(2) { animation-delay: 0.4s; }
+.other-heroes .hero-card:nth-child(3) { animation-delay: 0.6s; }
+.other-heroes .hero-card:nth-child(4) { animation-delay: 0.8s; }
+.other-heroes .hero-card:nth-child(5) { animation-delay: 1.0s; }
+.other-heroes .hero-card:nth-child(6) { animation-delay: 1.2s; }
+
+/* Main Heroes Section */
+.main-heroes {
+    margin: 3em 0;
+    padding: 2em;
+    background: linear-gradient(135deg, 
+        rgba(218, 165, 32, 0.1) 0%, 
+        rgba(184, 134, 11, 0.05) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    animation: glowPulse 3s infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.main-heroes::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    animation: powerEffect 10s infinite linear;
+}
+
+/* Main Heroes Special Card Styling */
+.main-heroes .hero-card {
+    background: linear-gradient(to bottom, #FFF 0%, #FFF9F0 100%);
+    border: 2px solid rgba(218, 165, 32, 0.3);
+    padding: 2em;
+}
+
+/* Hero-specific styles */
+.percy {
+    box-shadow: 0 4px 15px rgba(0, 119, 190, 0.2);
+    background: linear-gradient(120deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.percy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 119, 190, 0.2) 25%,
+        rgba(0, 119, 190, 0.2) 50%,
+        transparent 100%);
+    animation: powerEffect 4s infinite linear;
+    z-index: 1;
+}
+
+.annabeth {
+    box-shadow: 0 4px 15px rgba(125, 134, 203, 0.2);
+    background: linear-gradient(120deg, #f5f5f5 0%, #e8eaf6 100%);
+}
+
+.grover {
+    box-shadow: 0 4px 15px rgba(102, 187, 106, 0.2);
+    background: linear-gradient(120deg, #f1f8e9 0%, #dcedc8 100%);
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h3 {
+    color: var(--color-heading-bronze);
+    font-size: 1.8em;
+    margin: 0 0 0.3em 0;
+}
+
+.hero-content h4 {
+    color: #34495e;
+    margin: 0 0 1em 0;
+    font-weight: normal;
+    font-size: 1.1em;
+}
+
+/* Hero Details */
+.hero-details {
+    margin-top: 1.5em;
+    padding-top: 1.5em;
+    border-top: 1px solid rgba(205, 127, 50, 0.2);
+}
+
+.hero-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-details li {
+    margin: 0.8em 0;
+    padding-left: 1.5em;
+    position: relative;
+}
+
+.hero-details li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-bronze);
+}
+
+.hero-details strong {
+    color: var(--color-heading-bronze);
+    margin-right: 0.5em;
+}
+
+/* Other Heroes Section */
+.other-heroes {
+    margin-top: var(--spacing-xl);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .other-heroes .hero-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .other-heroes .hero-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .main-heroes {
+        padding: 1.5em;
+    }
+    
+    .hero-card {
+        padding: 1.2em;
+    }
+}

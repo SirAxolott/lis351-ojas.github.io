@@ -1,0 +1,500 @@
+:root {
+    /* Colors */
+    --color-bg-parchment: #F5E6D3;
+    --color-text-dark: #2C1810;
+    --color-heading-bronze: #8B4513;
+    --color-accent-bronze: #CD7F32;
+    --color-accent-gold: #FFD700;
+    --color-nav-blue-dark: #1E4D6B;
+    --color-nav-blue-light: #2A6F97;
+    --color-white: #FFF;
+    --color-shadow-base-rgb: 0, 0, 0;
+    --color-shadow-warm-rgb: 139, 69, 19;
+    --color-accent-bronze-rgb: 205, 127, 50;
+
+    /* Fonts */
+    --font-primary: Georgia, serif;
+    --font-size-base: 18px;
+    --font-size-lg: 1.1em;
+    --font-size-h1: 2.5em;
+    --line-height-base: 1.6;
+    --line-height-heading: 1.2;
+
+    /* Spacing */
+    --spacing-s: 0.5rem;   /* 8px */
+    --spacing-m: 1rem;    /* 16px */
+    --spacing-l: 1.5rem;   /* 24px */
+    --spacing-xl: 2.5rem;  /* 40px */
+    
+    /* Layout */
+    --layout-max-width: 1200px;
+    
+    /* Borders & Radius */
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 10px;
+    --border-bronze: 2px solid var(--color-accent-bronze);
+    --border-light-subtle: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Shadows */
+    --shadow-small: 0 3px 10px rgba(var(--color-shadow-base-rgb), 0.1);
+    --shadow-medium: 0 6px 18px rgba(var(--color-shadow-base-rgb), 0.08);
+    --shadow-large: 0 12px 30px rgba(var(--color-shadow-warm-rgb), 0.3);
+    --shadow-medium-warm: 0 4px 20px rgba(var(--color-shadow-warm-rgb), 0.2);
+    
+    /* Transitions */
+    --transition-fast: all 0.3s ease;
+    --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    /* Animations */
+    --animation-duration-fast: 0.5s;
+    --animation-duration-medium: 0.8s;
+    --animation-duration-long: 1s;
+    --animation-timing-default: ease-out;
+
+    /* Media Query Breakpoints */
+    --breakpoint-lg: 1200px;
+    --breakpoint-md: 900px;
+    --breakpoint-sm: 768px;
+}
+
+/* =================================================================== */
+/* 2. STANDARDIZED ANIMATION KEYFRAMES
+/* =================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Moved from series-style.css */
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes backgroundShimmer {
+    0%   { left: -100%; }
+    100% { left: 100%; }
+}
+
+
+/* =================================================================== */
+/* 3. BASE STYLES (using variables)
+/* =================================================================== */
+body {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    background-color: var(--color-bg-parchment);
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        rgba(218, 165, 32, 0.05) 0%,
+        transparent 70%
+    );
+    color: var(--color-text-dark);
+    padding: var(--spacing-xl);
+    position: relative;
+    overflow-x: hidden;
+}
+
+p {
+    margin-bottom: var(--spacing-l);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-dark);
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInFromLeft var(--animation-duration-medium) var(--animation-timing-default) forwards;
+    position: relative;
+}
+
+p::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(var(--color-shadow-warm-rgb), 0.2) 50%, 
+        transparent 100%
+    );
+    transform: scaleX(0);
+    transition: transform var(--animation-duration-fast) ease;
+}
+
+p:hover::after {
+    transform: scaleX(1);
+}
+
+p:nth-of-type(1) { animation-delay: 0.3s; }
+p:nth-of-type(2) { animation-delay: 0.6s; }
+p:nth-of-type(3) { animation-delay: 0.9s; }
+
+h1, h2 {
+    color: var(--color-heading-bronze);
+    line-height: var(--line-height-heading);
+    text-shadow: 2px 2px 4px rgba(var(--color-shadow-warm-rgb), 0.15);
+    position: relative;
+    opacity: 0;
+    animation: fadeIn var(--animation-duration-long) var(--animation-timing-default) forwards;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    margin: var(--spacing-s) 0 var(--spacing-l);
+    position: relative;
+    overflow: hidden;
+    padding: 0.2em 0;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--color-accent-bronze) 50%, 
+        transparent 100%
+    );
+    transform-origin: left;
+    animation: slideInFromLeft var(--animation-duration-long) var(--animation-timing-default) 0.5s forwards;
+    opacity: 0;
+}
+
+/* =================================================================== */
+/* 4. REUSABLE COMPONENTS (Card, Grid)
+/* =================================================================== */
+
+/* Description List Styling */
+dl {
+    margin: var(--spacing-m) 0;
+    padding: 0;
+}
+
+dt {
+    color: var(--color-heading-bronze);
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: var(--spacing-m);
+    position: relative;
+    padding-left: var(--spacing-m);
+}
+
+dt::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-bronze);
+}
+
+dd {
+    margin: var(--spacing-s) 0 var(--spacing-m) var(--spacing-m);
+    color: var(--color-text-dark);
+    line-height: var(--line-height-base);
+    padding-left: var(--spacing-m);
+    border-left: 2px solid rgba(var(--color-accent-bronze-rgb), 0.3);
+}
+
+/* Common Card Components */
+.card {
+    background: var(--color-white);
+    border-radius: var(--border-radius-large);
+    padding: var(--spacing-l);
+    box-shadow: var(--shadow-medium);
+    border: 1px solid rgba(var(--color-shadow-warm-rgb), 0.06);
+    transition: var(--transition-smooth);
+    animation: slideInFromLeft var(--animation-duration-medium) var(--animation-timing-default) backwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(var(--color-shadow-base-rgb), 0.12);
+}
+
+/* Common Details List Styling */
+.details-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    margin: var(--spacing-s) 0;
+    padding-left: var(--spacing-m);
+    position: relative;
+    color: var(--color-text-dark);
+}
+
+.details-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent-bronze);
+}
+
+.details-list li strong {
+    color: var(--color-heading-bronze);
+    font-weight: bold;
+}
+
+/* Common Section Styling */
+.content-section {
+    background: linear-gradient(135deg, var(--color-white) 0%, #faf6f2 100%);
+    padding: var(--spacing-l);
+    margin: var(--spacing-xl) 0;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    animation: slideUpFade var(--animation-duration-medium) var(--animation-timing-default) forwards;
+}
+
+.content-section h2 {
+    margin-top: 0;
+    color: var(--color-heading-bronze);
+}
+
+/* Common Heading Styles */
+.subtitle {
+    color: #34495e;
+    margin: 0 0 var(--spacing-m) 0;
+    font-weight: normal;
+    font-size: 1.1em;
+}
+
+/* Base content section component */
+.content-section {
+    max-width: 980px;
+    margin: var(--spacing-l) auto;
+    padding: var(--spacing-l);
+    background: linear-gradient(135deg, var(--color-white) 0%, #f8f9fa 100%);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--shadow-medium);
+    transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+    animation: slideUpFade 0.44s ease both;
+}
+
+.content-section:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(var(--color-shadow-base-rgb), 0.12);
+}
+
+/* Base grid layout */
+.grid-layout {
+    display: grid;
+    gap: var(--spacing-l);
+    padding: var(--spacing-m) 0;
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-autofit {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+
+/* =================================================================== */
+/* 5. NAVIGATION (using variables)
+/* =================================================================== */
+nav {
+    background: linear-gradient(135deg, var(--color-nav-blue-dark) 0%, var(--color-nav-blue-light) 100%);
+    padding: var(--spacing-m) var(--spacing-l);
+    margin-bottom: var(--spacing-xl);
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--shadow-small);
+    border: var(--border-light-subtle);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeIn var(--animation-duration-medium) var(--animation-timing-default) forwards;
+    z-index: 1000;
+}
+
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 45%,
+        rgba(255, 255, 255, 0.1) 55%,
+        transparent 100%);
+    animation: backgroundShimmer 8s linear infinite;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 var(--spacing-m);
+    font-size: var(--font-size-lg);
+    opacity: 0;
+    animation: fadeIn var(--animation-duration-fast) var(--animation-timing-default) forwards;
+}
+
+/* Stagger nav items animation */
+nav ul li:nth-child(1) { animation-delay: 0.2s; }
+nav ul li:nth-child(2) { animation-delay: 0.3s; }
+nav ul li:nth-child(3) { animation-delay: 0.4s; }
+nav ul li:nth-child(4) { animation-delay: 0.5s; }
+nav ul li:nth-child(5) { animation-delay: 0.6s; }
+nav ul li:nth-child(6) { animation-delay: 0.7s; }
+
+nav ul li a {
+    color: var(--color-accent-gold);
+    text-decoration: none;
+    padding: var(--spacing-s) var(--spacing-m);
+    transition: var(--transition-fast);
+    text-shadow: 0 1px 2px rgba(var(--color-shadow-base-rgb), 0.2);
+    position: relative;
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--color-accent-gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-fast);
+}
+
+nav ul li a:hover {
+    color: var(--color-white);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+nav ul li a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* =================================================================== */
+/* 6. OTHER STYLES (using variables)
+/* =================================================================== */
+.cover-right {
+    float: right;
+    width: 30%;
+    max-width: 300px;
+    min-width: 200px;
+    height: auto;
+    margin: 0 0 var(--spacing-l) var(--spacing-xl);
+    border: var(--border-bronze);
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--shadow-medium-warm),
+               0 0 0 1px rgba(var(--color-accent-bronze-rgb), 0.1);
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    opacity: 0;
+    transform: translateX(30px);
+    animation: slideInFromRight var(--animation-duration-long) var(--animation-timing-default) 0.2s forwards;
+    position: relative;
+}
+
+.cover-right::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: var(--border-radius-small);
+    background: linear-gradient(45deg, 
+        rgba(var(--color-accent-bronze-rgb), 0.2) 0%, 
+        transparent 50%, 
+        rgba(var(--color-accent-bronze-rgb), 0.2) 100%
+    );
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+.cover-right:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: var(--shadow-large),
+                0 4px 8px rgba(var(--color-shadow-warm-rgb), 0.1);
+}
+
+.cover-right:hover::after {
+    opacity: 1;
+    animation: backgroundShimmer 2s linear infinite;
+}
+
+/* =================================================================== */
+/* 7. RESPONSIVE BREAKPOINTS (Standardized)
+/* =================================================================== */
+@media (max-width: var(--breakpoint-md)) {
+    /* Base adjustments for medium screens */
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: var(--breakpoint-sm)) {
+    body {
+        font-size: 1rem; /* 16px base on mobile */
+        padding: var(--spacing-l);
+    }
+    
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .cover-right {
+        float: none;
+        display: block;
+        width: 70%;
+        margin: 0 auto var(--spacing-l);
+    }
+}
